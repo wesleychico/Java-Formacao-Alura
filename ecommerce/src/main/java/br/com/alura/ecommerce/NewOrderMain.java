@@ -16,8 +16,8 @@ public class NewOrderMain {
 		var value = "132123,67523,7894589745";
 		var record = new ProducerRecord<>("ECOMMERCE_NEW_ORDER", value, value);
 		
-		producer.send(record, (data, ex) -> {
-// Envia um novo pedido (Producer)			
+//		Produzir um novo pedido 
+		producer.send(record, (data, ex) -> {	
 			if(ex != null) {
 				ex.printStackTrace();
 				return;
@@ -26,13 +26,11 @@ public class NewOrderMain {
 		}).get();
 	}
 
+//	Configuracoes de onde esta rodando o kafka (IP)
+//  Transformar a mensagem de srting para bytes (Key e Valor)	
 	private static Properties properties() {
 		var properties = new Properties();
-
-//	Configuracoes de onde esta rodando o kafka
 		properties.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "127.0.0.1:9092");
-
-// Transformar a mensagem de srting para bytes (Key e Valor)
 		properties.setProperty(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
 		properties.setProperty(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
 		return properties;

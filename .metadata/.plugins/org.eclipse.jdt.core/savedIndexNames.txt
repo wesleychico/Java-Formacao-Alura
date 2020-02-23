@@ -1,0 +1,9 @@
+INDEX VERSION 1.131+/home/chico/eclipse-workspace/.metadata/.plugins/org.eclipse.jdt.core
+3574491084.index
+708164662.index
+1383811331.index
+2516571728.index
+646308851.index
+2530410443.index
+2016509166.index
+2257587035.index
