@@ -1,6 +1,7 @@
 package br.com.alura.ecommerce;
 
 import java.util.Properties;
+import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 
 import org.apache.kafka.clients.producer.Callback;
@@ -14,22 +15,28 @@ public class NewOrderMain {
 	public static void main(String[] args) throws InterruptedException, ExecutionException {
 		
 		var producer = new KafkaProducer<String, String>(properties());
-		var value = "132123,67523,7894589745";
-		var record = new ProducerRecord<>("ECOMMERCE_NEW_ORDER", value, value);
 		
-//		Produzir um novo pedido 
-		Callback callback = (data, ex) -> {	
-			if(ex != null) {
-				ex.printStackTrace();
-				return;
-			}
-			System.out.println("Sucesso enviando " + data.topic() + ":::partition: " + data.partition() + "/ offset: " + data.offset() + "/ timestamp: " + data.timestamp());
-		};
-		var email = "Thank you for your order! We are processing your order!";
-		var emailRecord = new ProducerRecord<>("ECOMMERCE_SEND_EMAIL", email, email);
-		producer.send(record, callback).get();
-		producer.send(emailRecord, callback).get();
+		for (var i = 0; i < 100; i++) {
+						
+			var key = UUID.randomUUID().toString();
+			var value = key + ",67523,7894589745";
+			var record = new ProducerRecord<>("ECOMMERCE_NEW_ORDER", key, value);
+			
+	//		Produzir um novo pedido 
+			Callback callback = (data, ex) -> {	
+				if(ex != null) {
+					ex.printStackTrace();
+					return;
+				}
+				System.out.println("Sucesso enviando " + data.topic() + ":::partition: " + data.partition() + "/ offset: " + data.offset() + "/ timestamp: " + data.timestamp());
+			};
+			var email = "Thank you for your order! We are processing your order!";
+			var emailRecord = new ProducerRecord<>("ECOMMERCE_SEND_EMAIL", key, email);
+			producer.send(record, callback).get();
+			producer.send(emailRecord, callback).get();
+		}
 	}
+		
 
 //	Configuracoes de onde esta rodando o kafka (IP)
 //  Transformar a mensagem de srting para bytes (Key e Valor)	
