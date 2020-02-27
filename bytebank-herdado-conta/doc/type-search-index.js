@@ -1,0 +1,1 @@
+typeSearchIndex = [{"p":"br.com.bytebank.banco.model","l":"Cliente"},{"p":"br.com.bytebank.banco.model","l":"Conta"},{"p":"br.com.bytebank.banco.especial","l":"ContaEspecial"},{"p":"br.com.bytebank.banco.teste","l":"TesteContas"},{"p":"br.com.bytebank.banco.teste","l":"TesteSaca"},{"p":"br.com.bytebank.banco.teste","l":"TesteTributaveis"}]
