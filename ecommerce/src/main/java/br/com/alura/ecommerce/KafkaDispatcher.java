@@ -13,32 +13,32 @@ import org.apache.kafka.common.serialization.StringSerializer;
 /*
  * kafka - Cria o Consumidor
  */
-class KafkaDispatcher implements Closeable{
+class KafkaDispatcher<T> implements Closeable{
 
-	private final KafkaProducer<String, String> producer;
+	private final KafkaProducer<String, T> producer;
 	
 	KafkaDispatcher(){
-		this.producer = new KafkaProducer<String, String>(properties());
+		this.producer = new KafkaProducer<>(properties());
 	}
 	
 	private static Properties properties() {
 		var properties = new Properties();
 		properties.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "127.0.0.1:9092"); //Configurando IP do Kafka
 		properties.setProperty(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName()); //Trocando a mensagem de String para byte (Key)
-		properties.setProperty(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName()); //Trocando a mensagem de String para byte (Value)
+		properties.setProperty(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, GsonSerializer.class.getName()); //Trocando a mensagem de String para byte (Value)
 		return properties;
 	}
-	
-	void send(String topic, String key, String value) throws ExecutionException, InterruptedException {
+
+	void send(String topic, String key, T value) throws ExecutionException, InterruptedException {
 		var record = new ProducerRecord<>(topic, key, value);
-		Callback callback = (data, ex) -> { //Produzindo novo pedido	
-			if(ex != null) {
+		Callback callback = (data, ex) -> {//produzindo um novo pedido
+			if (ex != null) {
 				ex.printStackTrace();
 				return;
 			}
-			System.out.println("Sucesso enviando " + data.topic() + ":::partition: " + data.partition() + "/ offset: " + data.offset() + "/ timestamp: " + data.timestamp());
+			System.out.println("sucesso enviando " + data.topic() + ":::partition " + data.partition() + "/ offset " + data.offset() + "/ timestamp " + data.timestamp());
 		};
-			producer.send(record,callback).get();
+		producer.send(record, callback).get();
 	}
 	
 	@Override

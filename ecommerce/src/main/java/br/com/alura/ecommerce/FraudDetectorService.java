@@ -11,7 +11,7 @@ public class FraudDetectorService {
     			fraudService::parse)){
     		service.run();
     	}
-    }
+}
     	
     private void parse (ConsumerRecord<String, String> record) {
     	  System.out.println("------------------------------------------");

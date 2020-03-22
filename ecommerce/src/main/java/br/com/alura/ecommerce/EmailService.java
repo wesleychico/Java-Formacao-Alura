@@ -16,8 +16,8 @@ public class EmailService {
     public void parse(ConsumerRecord<String, String> record) {
     	System.out.println("------------------------------------------");
         System.out.println("Send email");
-//	    System.out.println(record.key());
-//	    System.out.println(record.value());
+	    System.out.println(record.key());
+	    System.out.println(record.value());
         System.out.println(record.partition());
         System.out.println(record.offset());
         try {
