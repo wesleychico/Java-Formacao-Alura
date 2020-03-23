@@ -6,18 +6,19 @@ public class FraudDetectorService {
 
     public static void main(String[] args) {
     	var fraudService = new FraudDetectorService();
-    	try (var service = new KafkaService(EmailService.class.getSimpleName(),
-    			"ECOMMERCE_NEW_ORDER", 
-    			fraudService::parse)){
+    	try (var service = new KafkaService<>(EmailService.class.getSimpleName(),
+                "ECOMMERCE_NEW_ORDER",
+                fraudService::parse,
+                Order.class)){
     		service.run();
     	}
 }
     	
-    private void parse (ConsumerRecord<String, String> record) {
+    private void parse (ConsumerRecord<String, Order> record) {
     	  System.out.println("------------------------------------------");
           System.out.println("Processing new order, checking for fraud");
-//        System.out.println(record.key());
-//        System.out.println(record.value());
+          System.out.println(record.key());
+          System.out.println(record.value());
           System.out.println(record.partition());
           System.out.println(record.offset());
           try {
