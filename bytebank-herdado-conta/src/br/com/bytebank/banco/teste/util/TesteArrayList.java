@@ -3,12 +3,15 @@ package br.com.bytebank.banco.teste.util;
 import br.com.bytebank.banco.model.Conta;
 import br.com.bytebank.banco.model.ContaCorrente;
 
-import java.util.ArrayList;
+import java.util.*;
 
 public class TesteArrayList {
     public static void main(String[] args) {
 
-        ArrayList lista = new ArrayList();
+        //List<Conta> lista = new ArrayList<Conta>();
+        //List<Conta> lista = new LinkedList<Conta>();
+        //Collection<Conta> lista = new Vector<Conta>();
+        List<Conta> lista = new Vector<Conta>();
 
         Conta cc = new ContaCorrente(22,11);
         lista.add(cc);
