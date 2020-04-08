@@ -5,12 +5,9 @@ import br.com.bytebank.banco.model.Conta;
 import br.com.bytebank.banco.model.ContaCorrente;
 import br.com.bytebank.banco.model.ContaPoupanca;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
-public class TesteSortOrdemNatural {
+public class TesteArrayOrdenacao {
 
     public static void main(String[] args) {
 
@@ -44,12 +41,20 @@ public class TesteSortOrdemNatural {
         lista.add(cc3);
         lista.add(cc4);
 
-        //Collections.sort(null);
-        Collections.sort(lista);
-
         for (Conta conta : lista) {
-            System.out.println(conta + ", " + conta.getTitular().getNome());
+            System.out.println(conta);
         }
+
+        lista.sort( (conta1, conta2) -> Integer.compare(conta1.getNumero(), conta2.getNumero()) );
+
+        Comparator<Conta> comp = (Conta conta1, Conta conta2) -> {
+                String nomeC1 = conta1.getTitular().getNome();
+                String nomeC2 = conta2.getTitular().getNome();
+                return nomeC1.compareTo(nomeC2);
+
+        };
+
+        System.out.println("------------------");
+        lista.forEach( (conta) -> System.out.println(conta + ", " + conta.getTitular().getNome()));
     }
 }
-
