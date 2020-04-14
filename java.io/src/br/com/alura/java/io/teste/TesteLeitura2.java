@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class TesteLeitura2 {
     public static void main(String[] args) throws Exception {
 
-        Scanner scanner = new Scanner(new File("contas.csv"));
+        Scanner scanner = new Scanner(new File("contas.csv"), "UTF-8");
 
         //Devolve falso quando nao existir mais conteudo (hastNextLine)
         while (scanner.hasNextLine()){
