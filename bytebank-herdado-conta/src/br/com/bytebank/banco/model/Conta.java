@@ -1,5 +1,7 @@
 package br.com.bytebank.banco.model;
 
+import java.io.Serializable;
+
 /**
 * Classe que representa uma Conta do cliente no ByteBank
 *
@@ -7,7 +9,7 @@ package br.com.bytebank.banco.model;
 * @version 0.1
 */
 
-public abstract class Conta implements Comparable<Conta>{
+public abstract class Conta implements Comparable<Conta>, Serializable {
 
 	protected double saldo;
 	private int agencia;
