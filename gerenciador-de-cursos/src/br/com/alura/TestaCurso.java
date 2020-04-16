@@ -17,11 +17,5 @@ public class TestaCurso {
         javaColecoes.adiciona(new Aula("Modelando com colecoes", 24));
         System.out.println(aulas);
 
-
-
-
-
-
-
     }
 }
