@@ -17,7 +17,7 @@ public class Aula implements Comparable<Aula>{
     public int getTempo() {
         return tempo;
     }
-
+    
     //Reescrevendo o metodo toString
     @Override
     public String toString() {
