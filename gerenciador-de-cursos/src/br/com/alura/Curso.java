@@ -8,6 +8,7 @@ public class Curso {
     private String instrutor;
     private List<Aula>  aulas = new LinkedList<>();
     private Set<Aluno> alunos = new HashSet<>();
+    private Map<Integer, Aluno> matriculaParaAluno = new HashMap<>();
 
     public Curso(String nome, String instrutor) {
         this.nome = nome;
@@ -30,7 +31,7 @@ public class Curso {
         this.aulas.add(aula);
     }
 
-    // evolucao java 8
+    // evolucao java 8 - For
     public int getTempo(){
         return this.aulas.stream().mapToInt(Aula::getTempo).sum();
     }
@@ -47,6 +48,11 @@ public class Curso {
 
     public void matricula(Aluno aluno) {
         this.alunos.add(aluno);
+        this.matriculaParaAluno.put(aluno.getNumeroMatricula(), aluno);
+    }
+
+    public Aluno buscaMatricula(int numero){
+        return this.matriculaParaAluno.get(numero);
     }
 
     public Set<Aluno> getAlunos() {
