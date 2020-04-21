@@ -2,7 +2,6 @@ package br.com.caelum.gerenciador.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -12,27 +11,31 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class NovaEmpresaServlet
+ * Servlet implementation class ListaEmpresaServlet
  */
-@WebServlet(description = "Cadastra uma nova empresa", urlPatterns = { "/novaEmpresa" })
-public class NovaEmpresaServlet extends HttpServlet {
+@WebServlet("/listaEmpresas")
+public class ListaEmpresaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("Cadastrando nova empresa...");
-		
-		String nomeEmpresa = request.getParameter("nome");
-		Empresa empresa = new Empresa();
-		empresa.setNome(nomeEmpresa);
-		
+		System.out.println("Listando as empresas cadastradas...");
+
 		Banco banco = new Banco();
-		banco.adiciona(empresa);	
-		
+		List<Empresa> lista = banco.getEmpresas();
+
 		PrintWriter out = response.getWriter();
+
 		out.println("<html>");
 		out.println("<body>");
-		out.println("Empresa " + nomeEmpresa + " cadastrada com sucesso!");
+		out.println("<ul>");
+
+			for (Empresa empresa : lista) {
+				out.println("<li>" + empresa.getNome() + "</li>");
+				
+			}
+		
+		out.println("</ul>");
 		out.println("</body>");
 		out.println("</html>");
 
