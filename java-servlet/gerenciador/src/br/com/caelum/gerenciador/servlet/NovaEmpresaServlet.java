@@ -5,11 +5,14 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.catalina.startup.SetAllPropertiesRule;
 
 /**
  * Servlet implementation class NovaEmpresaServlet
@@ -29,12 +32,10 @@ public class NovaEmpresaServlet extends HttpServlet {
 		Banco banco = new Banco();
 		banco.adiciona(empresa);	
 		
-		PrintWriter out = response.getWriter();
-		out.println("<html>");
-		out.println("<body>");
-		out.println("Empresa " + nomeEmpresa + " cadastrada com sucesso!");
-		out.println("</body>");
-		out.println("</html>");
+//		chamar JSP
+		RequestDispatcher rd = request.getRequestDispatcher("/novaEmpresaCriada.jsp");
+		request.setAttribute("empresa", empresa.getNome());
+		rd.forward(request, response);
 
 	}
 
