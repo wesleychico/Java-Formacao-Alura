@@ -1,30 +1,25 @@
-package br.com.caelum.gerenciador.servlet;
+package br.com.caelum.gerenciador.acao;
 
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class NovaEmpresaServlet
- */
-@WebServlet("/novaEmpresa")
-public class NovaEmpresaServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+import br.com.caelum.gerenciador.modelo.Banco;
+import br.com.caelum.gerenciador.modelo.Empresa;
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		System.out.println("Cadastrando nova empresa...");
+public class NovaEmpresa {
+	
+	public void executa(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String nomeEmpresa = request.getParameter("nome");
 		String paramDataEmpresa = request.getParameter("data");
+
+		System.out.println("Adicionando uma nova empresa");
 		
 		Date dataAbertura = null;
 		
@@ -47,12 +42,7 @@ public class NovaEmpresaServlet extends HttpServlet {
 		request.setAttribute("empresa", empresa.getNome());
 
 		// Redirecionando pelo navegador
-		response.sendRedirect("listaEmpresas");
-		
-//		chamar JSP - Redirecionamento para  servlet
-//		RequestDispatcher rd = request.getRequestDispatcher("listaEmpresa");
-//		request.setAttribute("empresa", empresa.getNome());
-//		rd.forward(request, response);
+		response.sendRedirect("entrada?acao=ListaEmpresas");
 
 	}
 

@@ -1,28 +1,26 @@
-package br.com.caelum.gerenciador.servlet;
+package br.com.caelum.gerenciador.acao;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.sound.midi.Soundbank;
 
-@WebServlet("/alteraEmpresa")
-public class AlteraEmpresaServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+import br.com.caelum.gerenciador.modelo.Banco;
+import br.com.caelum.gerenciador.modelo.Empresa;
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		System.out.println("Alterando Empresa...");
+public class AlteraEmpresa {
+
+	public void executa(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		
 		String nomeEmpresa = request.getParameter("nome");
 		String paramDataEmpresa = request.getParameter("data");
 		String paramId = request.getParameter("id");
 		Integer id = Integer.valueOf(paramId);
+		
+		System.out.println("Acao removendo empresa");
 		
 		Date dataAbertura = null;
 		try {
@@ -33,15 +31,12 @@ public class AlteraEmpresaServlet extends HttpServlet {
 			throw new ServletException(e);
 		} 
 		
-		System.out.println(id);
 		Banco banco = new Banco();
 		Empresa empresa = banco.buscaEmpresaPelaId(id);
 		empresa.setNome(nomeEmpresa);
 		empresa.setDataAbertura(dataAbertura);
 		
-		response.sendRedirect("listaEmpresas");
-
+		response.sendRedirect("entrada?acao=ListaEmpresas");
 		
 	}
-
 }
