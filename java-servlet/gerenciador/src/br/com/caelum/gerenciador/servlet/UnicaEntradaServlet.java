@@ -27,9 +27,7 @@ public class UnicaEntradaServlet extends HttpServlet {
 		if (ehUmaAcaoProtegida && usuarioNaoEstaLogado) {
 			response.sendRedirect("entrada?acao=LoginForm");
 			return;
-		}
-		
-		
+		}		
 		
 		String nomeDaClasse = "br.com.caelum.gerenciador.acao." + paramAcao;
 								
