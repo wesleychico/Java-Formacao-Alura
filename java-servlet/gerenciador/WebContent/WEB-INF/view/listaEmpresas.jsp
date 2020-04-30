@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.List,br.com.caelum.gerenciador.modelo.Empresa" %>
+<%@ page import="java.util.List,br.com.caelum.gerenciador.modelo.*" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
@@ -11,7 +11,12 @@
 <title>Insert title here</title>
 </head>
 <body>
+
+	Usuario Logado: ${usuarioLogado.login }
 	
+	<br>
+	<br>
+	<br>
 	<c:if test="${not empty empresa }">
 		Empresa ${ empresa } cadastrada com sucesso!
 	</c:if>
