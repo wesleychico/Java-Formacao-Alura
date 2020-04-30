@@ -30,7 +30,7 @@ public class Login implements Acao {
 			sessao.setAttribute("usuarioLogado", usuario);
 			return "redirect:entrada?acao=ListaEmpresas";
 		} else {
-			System.out.println("Login OK");
+			System.out.println("Login incorreto");
 			return "redirect:entrada?acao=LoginForm";
 		}
 		
